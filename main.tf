@@ -156,7 +156,7 @@ resource "aws_rds_cluster_instance" "this" {
 resource "aws_db_parameter_group" "this" {
   count = var.db_parameter_group_name == null ? 1 : 0
 
-  name   = "${var.name}-db-${var.parameter_group_family}"
+  name   = "${var.name}-db-pg"
   family = var.parameter_group_family
 
   dynamic "parameter" {
@@ -174,7 +174,7 @@ resource "aws_db_parameter_group" "this" {
 
   tags = merge(
     {
-      "Name" = "${var.name}-db-pg-${var.engine_version}"
+      "Name" = "${var.name}-db-pg"
     },
     var.tags
   )
@@ -185,7 +185,7 @@ resource "aws_db_parameter_group" "this" {
 resource "aws_rds_cluster_parameter_group" "this" {
   count = var.create_cluster && var.cluster_parameter_gp_name == null ? 1 : 0
 
-  name        = "${var.name}-cluster-${var.parameter_group_family}"
+  name        = "${var.name}-cluster-pg"
   family      = var.parameter_group_family
   description = "RDS ${var.parameter_group_family} cluster parameter group"
 
@@ -204,7 +204,7 @@ resource "aws_rds_cluster_parameter_group" "this" {
 
   tags = merge(
     {
-      "Name" = "${var.name}-cluster-pg-${var.engine_version}"
+      "Name" = "${var.name}-cluster-pg"
     },
     var.tags
   )
