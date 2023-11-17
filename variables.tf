@@ -243,6 +243,18 @@ variable "security_group_ids" {
   default     = null
 }
 
+variable "serverlessv2_max_capacity" {
+  type        = number
+  description = "Maximum capacity for an Aurora DB cluster in provisioned DB engine mode. The maximum capacity must be greater than or equal to the minimum capacity. Valid capacity values are in a range of 0.5 up to 128 in steps of 0.5."
+  default     = 0.5
+}
+
+variable "serverlessv2_min_capacity" {
+  type        = number
+  description = "Minimum capacity for an Aurora DB cluster in provisioned DB engine mode. The minimum capacity must be lesser than or equal to the maximum capacity. Valid capacity values are in a range of 0.5 up to 128 in steps of 0.5."
+  default     = 1.0
+}
+
 variable "skip_final_snapshot" {
   type        = bool
   description = "Whether to skip to create snapshot while delete the database"

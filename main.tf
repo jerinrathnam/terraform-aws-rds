@@ -102,6 +102,15 @@ resource "aws_rds_cluster" "this" {
   storage_encrypted               = var.encrypt_storage
   vpc_security_group_ids          = var.security_group_ids
 
+  dynamic "serverlessv2_scaling_configuration" {
+    for_each = var.instance_class == "db.serverless" ? [1] : []
+
+    content {
+      max_capacity = var.serverlessv2_max_capacity
+      min_capacity = var.serverlessv2_min_capacity
+    }
+  }
+
   lifecycle {
     ignore_changes = [
       snapshot_identifier,
